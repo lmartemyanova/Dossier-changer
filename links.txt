@@ -5,3 +5,5 @@
 https://www.cyberforum.ru/python-beginners/thread2681977.html
 
 https://blog.aspose.com/ru/words/find-and-replace-text-in-word-using-python/
+
+Замена текста в колонтитулах: https://github.com/python-openxml/python-docx/issues/741
