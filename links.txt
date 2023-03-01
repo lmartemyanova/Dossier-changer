@@ -1,9 +1,15 @@
 Замена doc на docx: https://www.youtube.com/watch?v=YV2X2GLrPdw
+Код: https://maxfad.ru/video-uroki/osnovy-python/696-kak-preobrazovat-doc-v-docx-na-yazyke-python-v-pycharm-massovaya-konvertatsiya-starykh-fajlov-v-docx-video.html
+https://products.aspose.com/words/python-net/conversion/doc-to-docx/
 
 Замена текста: https://www.youtube.com/watch?v=DOcQIn60mB4
+Код: https://maxfad.ru/video-uroki/osnovy-python/697-kak-izmenyat-tekst-v-word-s-pomoshchyu-yazyka-python-v-srede-pycharm-menyaem-paragrafy-tablitsy-i-shrifty-video.html
 
 https://www.cyberforum.ru/python-beginners/thread2681977.html
 
 https://blog.aspose.com/ru/words/find-and-replace-text-in-word-using-python/
 
 Замена текста в колонтитулах: https://github.com/python-openxml/python-docx/issues/741
+
+Замена имени файла: https://www.tutorialspoint.com/rename-multiple-files-using-python
+https://pynative.com/python-rename-file/
