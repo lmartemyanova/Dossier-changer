@@ -1,9 +1,32 @@
+# pip install python-docx
 import docx
 import os
 
-Dictionary = {"Лираглутид, таблетки, 0,1 мг": "Эзомепразол, капсулы кишечнорастворимые, 20 мг, 50 мг",
-              'ООО «Компания»': 'ООО «Другая компания»',
-              "1.2.1. Какой-то раздел досье": "Какой-то другой раздел досье"}
+Dictionary = {
+
+             }
+
+def rename():
+    '''
+    To change the filename:
+    If filename has specific text markers
+    (as name of the manufacturer etc).
+    Markers should be placed to dict(file_names)
+    as "old marker": "new marker"
+    :return:
+    '''
+    file_names = {
+
+                 }
+    for name in file_names:
+        for file in os.listdir(folder):
+            if name in file and file.endswith('docx') and not file.startswith('~'):
+                old_name = os.path.join(folder, file)
+                n = os.path.splitext(file)[0]
+                b = n.split('_', maxsplit = 2)
+                new = b[0] + '_' + b[1] + '_' + file_names[name] + '.docx'
+                new_name = os.path.join(folder, new)
+                os.rename(old_name, new_name)
 
 paths = []
 folder = os.getcwd()
@@ -37,6 +60,10 @@ for path in paths:
             for paragraph in header.paragraphs:
                 if paragraph.text.find(k) >= 0:
                     paragraph.text = paragraph.text.replace(k, Dictionary[k])
+                    style = doc.styles['Normal']
+                    font = style.font
+                    font.name = 'Times New Roman'
+                    font.size = docx.shared.Pt(9)
 
             for table in header.tables:
                 for col in table.columns:
@@ -44,5 +71,10 @@ for path in paths:
                         for paragraph in cell.paragraphs:
                             if paragraph.text.find(k) >= 0:
                                 paragraph.text = paragraph.text.replace(k, Dictionary[k])
+                                style = doc.styles['Normal']
+                                font = style.font
+                                font.name = 'Times New Roman'
+                                font.size = docx.shared.Pt(9)
 
     doc.save(os.path.basename(path))
+    rename()
