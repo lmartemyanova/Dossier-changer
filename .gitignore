@@ -3,3 +3,5 @@ Lib/
 Scripts/
 .idea/
 pyvenv.cfg
+docx-replace.py
+Dossier-changer-code.py

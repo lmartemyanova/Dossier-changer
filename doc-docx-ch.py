@@ -2,6 +2,7 @@
 from win32com import client as wc
 
 import os
+
 w = wc.Dispatch('Word.Application')
 
 paths = []
@@ -13,7 +14,7 @@ for root, dirs, files in os.walk(folder):
 
 for path in paths:
     doc = w.Documents.Open(path)
-    doc.SaveAs(path+"x", 16)  # try SaveAs2 method
+    doc.SaveAs(path + "x", 16)
     doc.Close()
 
 w.Quit()
