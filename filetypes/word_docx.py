@@ -52,8 +52,8 @@ class WordDocx:
                             paragraph.text = paragraph.text.replace(k, text_dict[k])
                             # style = doc.styles['Normal']
                             # font = style.font
-                            # font.name = 'Times New Roman'
-                            # font.size = docx.shared.Pt(9)
+                            font.name = 'Times New Roman'
+                            font.size = docx.shared.Pt(9)
                     for table in header.tables:
                         for col in table.columns:
                             for cell in col.cells:
