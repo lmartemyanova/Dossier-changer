@@ -83,7 +83,7 @@ class WordDocx:
             try:
                 doc = docx.Document(path)
             except Exception:
-                return self.file
+                return f'Возникла ошибка при чтении файла: {self.file}'
             for paragraph in doc.paragraphs:
                 if paragraph.text.find(phrase) >= 0:
                     return self.file
