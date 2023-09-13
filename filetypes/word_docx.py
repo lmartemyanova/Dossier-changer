@@ -6,9 +6,13 @@ import docx
 class WordDocx:
 
     def __init__(self, file):
+        """
+        to initialize the class object
+        :param file: the filename of the file
+        """
         self.file = file
 
-    def rename(self, filenames_attributes, path):
+    def rename(self, filenames_attributes: dict, path: str) -> None:
         """
         To change the filename:
         If filename has specific text markers
@@ -16,6 +20,8 @@ class WordDocx:
         Markers should be placed to dict(file_names)
         as "old marker": "new marker"
         :return:
+        :param filenames_attributes: the dict from user input (key = phrase to change, value = phrase for change)
+        :param path: the
         """
 
         for name in filenames_attributes:
@@ -28,7 +34,7 @@ class WordDocx:
                 os.rename(old_name, new_name)
         return
 
-    def replace_text(self, text_dict, path):
+    def replace_text(self, text_dict: dict, path: str) -> None:
         if self.file.endswith('docx') and not self.file.startswith('~'):
             doc = docx.Document(path)
             style = doc.styles['Normal']
@@ -63,6 +69,41 @@ class WordDocx:
                                         # style = doc.styles['Normal']
                                         # font = style.font
             doc.save(os.path.basename(path))
+            return
+
+    def find_usages(self, phrase: str, path: str) -> str:
+        """
+        The method to find usages of any phrase in many files from user input
+        :param phrase: phrase from user
+        :param path:
+        :return: the name of the files where the usages of the phrase were founded
+        """
+        if self.file.endswith('docx') and not self.file.startswith('~'):
+            path = os.path.join(path, self.file)
+            try:
+                doc = docx.Document(path)
+            except Exception:
+                return self.file
+            for paragraph in doc.paragraphs:
+                if paragraph.text.find(phrase) >= 0:
+                    return self.file
+            for table in doc.tables:
+                for col in table.columns:
+                    for cell in col.cells:
+                        for paragraph in cell.paragraphs:
+                            if paragraph.text.find(phrase) >= 0:
+                                return self.file
+            for section in doc.sections:
+                header = section.header
+                for paragraph in header.paragraphs:
+                    if paragraph.text.find(phrase) >= 0:
+                        return self.file
+                for table in header.tables:
+                    for col in table.columns:
+                        for cell in col.cells:
+                            for paragraph in cell.paragraphs:
+                                if paragraph.text.find(phrase) >= 0:
+                                    return self.file
 
 
 class WordDoc(WordDocx):
