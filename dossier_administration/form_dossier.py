@@ -2,7 +2,12 @@ from filetypes.word_docx import WordDocx, WordDoc
 import os
 
 
-def get_text_dict():
+def get_text_dict() -> dict:
+    """
+    To form the dict with the text, which need to be replaced in all files of the dossier if found, from user input.
+    :return: dict of the text to be replaced
+    """
+
     text_dict = {}
     print('''Ниже вам будет предложена форма для ввода текста, который требуется заменить в каждом файле досье, /
     таких как название препарата, лекарственная форма, производители ГЛФ и АФС и т.д.
@@ -25,7 +30,12 @@ def get_text_dict():
     return text_dict
 
 
-def get_filenames_attributes():
+def get_filenames_attributes() -> dict:
+    """
+    To form the dict with the attributes of the filenames, which need to be replaced, from user input.
+    :return: dict of filenames attributes to be replaced
+    """
+
     filenames_attributes = {}
     print('''Введите атрибуты АФС или ГЛФ, которые необходимо заменить в названии(!) файлов (документов).
     Обратите внимание на необходимость полного соответствия исходных атрибутов (в т.ч. символы ".", "_", "-". 
@@ -44,7 +54,15 @@ def get_filenames_attributes():
     return filenames_attributes
 
 
-def form_dossier(folder):
+def form_dossier(folder: str) -> None:
+    """
+    To form the dossier from files of the other product, by the replacement of the text.
+    After the usage of this method the dossier has to be corrected and checked by hands before forming .xml!
+    :param folder: the path to the folder with files to form dossier.
+                   Only .doc/.docx and .pdf files are allowed, the others will ignore.
+    :return: None
+    """
+
     text_dict = get_text_dict()
     filenames_attributes = get_filenames_attributes()
     for root, dirs, files in os.walk(folder):

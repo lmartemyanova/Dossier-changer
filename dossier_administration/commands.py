@@ -5,17 +5,27 @@ from dossier_administration.find import find
 # from dossier_administration.form_xml import form_xml
 
 
-def show_info():
-    print('''
+def show_info() -> str:
+    """
+    To show the information how to use the program.
+    :return: str with the description of the allowed commands
+    """
+
+    info = '''
     Список доступных команд:
     "fd" - сформировать досье (вам будет последовательно предложено ввести данные для автоматического сбора шаблонов)
     "xml" - сформировать XML-файл
     "find" - найти определенную фразу в файлах
-    ''')
-    return
+    '''
+    return info
 
 
-def manage_program():
+def manage_program() -> None:
+    """
+    The infinite loop to manage the functions of the program.
+    :return: None
+    """
+
     while True:
         command = input("Введите команду: ")
         if command == "fd":

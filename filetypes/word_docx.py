@@ -10,6 +10,7 @@ class WordDocx:
         to initialize the class object
         :param file: the filename of the file
         """
+
         self.file = file
 
     def rename(self, filenames_attributes: dict, path: str) -> None:
@@ -19,9 +20,9 @@ class WordDocx:
         (as name of the manufacturer etc).
         Markers should be placed to dict(file_names)
         as "old marker": "new marker"
-        :return:
         :param filenames_attributes: the dict from user input (key = phrase to change, value = phrase for change)
-        :param path: the
+        :param path: the path to folder
+        :return: None
         """
 
         for name in filenames_attributes:
@@ -35,6 +36,13 @@ class WordDocx:
         return
 
     def replace_text(self, text_dict: dict, path: str) -> None:
+        """
+        To replace text, containing in param text_dict (key to value).
+        :param text_dict: the text to be replaced
+        :param path: the path to folder
+        :return: None
+        """
+
         if self.file.endswith('docx') and not self.file.startswith('~'):
             doc = docx.Document(path)
             style = doc.styles['Normal']
@@ -75,15 +83,17 @@ class WordDocx:
         """
         The method to find usages of any phrase in many files from user input
         :param phrase: phrase from user
-        :param path:
+        :param path: the path to folder
         :return: the name of the files where the usages of the phrase were founded
+                 in case of Exceptions, return the filename with the Exception.
         """
+
         if self.file.endswith('docx') and not self.file.startswith('~'):
             path = os.path.join(path, self.file)
             try:
                 doc = docx.Document(path)
-            except Exception:
-                return f'Возникла ошибка при чтении файла: {self.file}'
+            except Exception as e:
+                return f'Возникла ошибка {e} при чтении файла: {self.file}'
             for paragraph in doc.paragraphs:
                 if paragraph.text.find(phrase) >= 0:
                     return self.file
@@ -108,7 +118,13 @@ class WordDocx:
 
 class WordDoc(WordDocx):
 
-    def save_docx(self, path):
+    def save_docx(self, path: str) -> None:
+        """
+        To save a .doc file as .docx
+        :param path: the path to folder
+        :return: None
+        """
+
         w = wc.Dispatch('Word.Application')
         # path = os.path.join(path, self.file)
         file = self.file

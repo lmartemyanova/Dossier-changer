@@ -2,7 +2,14 @@ import os
 from filetypes.word_docx import WordDocx, WordDoc
 
 
-def find(folder:str, phrase:str) -> list:
+def find(folder: str, phrase: str) -> list:
+    """
+    To find any word or phrase in any count of .doc/.docx files
+    :param folder: the path to the folder with files.
+    :param phrase: str from user input which has to be found
+    :return:
+    """
+
     files_with_phrase = []
     for root, dirs, files in os.walk(folder):
         for file in files:
